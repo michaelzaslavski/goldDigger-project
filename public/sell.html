@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sell Gold</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-brand">
+      <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <ellipse cx="12" cy="6" rx="8" ry="3"></ellipse>
+        <path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"></path>
+        <path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"></path>
+      </svg>
+      <span>My Logo</span>
+    </div>
+    <div class="nav-ticker">
+    </div>
+    <button class="nav-menu-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+      <span>Menu</span>
+    </button>
+  </header>
+
+  <!-- Main Container -->
+  <main class="page-container">
+    
+    <section class="trade-card">
+      <div class="trade-header">
+        <div class="trade-header-left">
+          <h1 class="trade-title">Sell Gold</h1>
+          <p class="trade-desc">Liquidate part of your holding quickly. Review your portfolio balance below, choose how much to sell and see the estimated proceeds before confirming the sale.</p>
+        </div>
+        <div class="trade-header-right">
+          <div class="portfolio-balance-box">
+            <div class="pb-title">Portfolio balance</div>
+            <div class="pb-balance">2.35 oz</div>
+            <div class="pb-sub">Equivalent: <strong>USD 9,400.00</strong></div>
+            <div class="pb-sub">Available to sell: <strong>2.35 oz</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="trade-graph-box">
+        <svg class="chart-svg" viewBox="0 0 800 200" preserveAspectRatio="none">
+          <!-- Graph lines matching the mockup -->
+          <path d="M 10,80 L 40,75 L 80,65 L 120,70 L 160,55 L 200,60 L 250,55 L 300,60 L 350,50 L 400,65 L 450,50 L 500,45 L 550,55 L 600,40 L 650,50 L 700,40 L 750,50 L 790,45" fill="none" stroke="#666" stroke-width="4" stroke-linecap="round"/>
+          <path d="M 10,85 L 40,95 L 80,85 L 120,110 L 160,105 L 200,120 L 250,125 L 300,115 L 350,130 L 400,135 L 450,150 L 500,155 L 550,145 L 600,140 L 650,160 L 700,155 L 750,170 L 790,165" fill="none" stroke="#ccc" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="10" y1="190" x2="790" y2="190" stroke="#1a1a1a" stroke-width="3"/>
+        </svg>
+        <p class="concierge-text">Prefer a walkthrough? Visit the Help Center or contact our concierge at <a href="mailto:concierge@aurumvault.com" class="concierge-link">concierge@aurumvault.com</a> for personalized setup assistance.</p>
+      </div>
+
+      <div class="trade-action-row">
+        <div class="trade-selectors">
+          <button class="qty-pill">0.1 oz</button>
+          <button class="qty-pill">0.5 oz</button>
+          <button class="qty-pill">1 oz</button>
+          <div class="custom-qty">
+            <label>Custom oz</label>
+            <input type="number" value="0" min="0" step="0.1">
+          </div>
+        </div>
+        <div class="trade-checkout">
+          <div class="checkout-details">
+            <span class="checkout-label">Estimated proceeds</span>
+            <span class="checkout-value">USD 1,990.00</span>
+            <span class="checkout-fee">Fee: USD 10.00</span>
+            <span class="checkout-fee">Rate: USD 3,980 / oz</span>
+          </div>
+          <button class="btn btn-primary trade-btn">Sell</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Three Feature Widgets -->
+    <section class="widgets-grid">
+      <div class="widget-card">
+        <h3>Spot Snapshot</h3>
+        <div class="widget-content">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #e5e8eb 0%, #d8dbdf 100%); border-radius:4px;"></div>
+        </div>
+      </div>
+      <div class="widget-card">
+        <h3>Vault Image</h3>
+        <div class="widget-content img-container">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #e5e8eb 0%, #d8dbdf 100%); border-radius:4px;"></div>
+        </div>
+      </div>
+      <div class="widget-card">
+        <h3>Market Heat</h3>
+        <div class="widget-content">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #e5e8eb 0%, #d8dbdf 100%); border-radius:4px;"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+   <script type="module" src="sell.js" ></script>
+   <script type="module" src="nav.js" ></script>
+</body>
+</html>

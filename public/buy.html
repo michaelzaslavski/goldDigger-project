@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buy Gold</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-brand">
+      <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <ellipse cx="12" cy="6" rx="8" ry="3"></ellipse>
+        <path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"></path>
+        <path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"></path>
+      </svg>
+      <span>My Logo</span>
+    </div>
+     <div class="nav-ticker">
+    </div>
+    <button class="nav-menu-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+      <span>Menu</span>
+    </button>
+  </header>
+
+  <!-- Main Container -->
+  <main class="page-container">
+    
+    <section class="trade-card">
+      
+      <!-- Card Header -->
+      <div class="trade-header">
+        <div class="trade-header-left">
+          <h1 class="trade-title">Welcome to My app</h1>
+          <p class="trade-desc">Track the live gold price and buy instantly. Select the amount you want and complete your purchase in seconds.</p>
+        </div>
+        <div class="trade-header-right">
+          
+        </div>
+      </div>
+
+      <!-- Graph Container Box -->
+      <div class="trade-graph-box">
+        <svg class="chart-svg" viewBox="0 0 800 220" preserveAspectRatio="none">
+          <!-- Y-Axis line on the left -->
+          <line x1="10" y1="20" x2="10" y2="190" stroke="#000000" stroke-width="3"/>
+          
+          <!-- Upper Dark Graph Line -->
+          <path d="M 30,70 L 45,60 L 65,65 L 85,55 L 105,62 L 125,50 L 145,58 L 165,56 L 185,50 L 205,53 L 225,48 L 245,55 L 265,48 L 285,56 L 305,50 L 325,52 L 345,46 L 365,54 L 385,42 L 405,52 L 425,38 L 445,46 L 465,36 L 485,44 L 505,38 L 525,42 L 545,35 L 565,40 L 585,35 L 605,38 L 625,32 L 645,37 L 665,33 L 685,40 L 705,32 L 725,38" fill="none" stroke="#555555" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+          
+          <!-- Lower Declining Light Graph Line -->
+          <path d="M 30,75 L 55,80 L 80,88 L 105,95 L 130,110 L 155,102 L 180,112 L 205,122 L 230,120 L 255,135 L 280,138 L 305,145 L 330,148 L 355,152 L 380,150 L 405,160 L 430,158 L 455,168 L 480,162 L 505,172 L 530,175 L 555,170 L 580,178 L 605,176 L 630,182 L 655,188 L 680,178 L 705,188 L 725,192" fill="none" stroke="#b0b0b0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          
+          <!-- X-Axis Baseline -->
+          <line x1="10" y1="190" x2="790" y2="190" stroke="#000000" stroke-width="3"/>
+        </svg>
+
+        <p class="concierge-text">
+          Prefer a walkthrough? Visit the Help Center or contact our concierge at 
+          <a href="mailto:concierge@aurumvault.com" class="concierge-link">concierge@aurumvault.com</a> for personalized setup assistance.
+        </p>
+      </div>
+
+      <!-- Action Row -->
+       <form id="buy-form">
+      <div class="trade-action-row">
+        <div class="trade-selectors">
+          <button  class="qty-pill" data-oz="0.1">0.1 oz</button>
+          <button  class="qty-pill" data-oz="0.5">0.5 oz</button>
+          <button  class="qty-pill" data-oz="1">1 oz</button>
+          <div class="custom-qty">
+            <label>Custom oz</label>
+            <input id="custom-qty-input" type="number" value="0" min="0" step="0.1">
+          </div>
+        </div>
+        
+        <div class="trade-checkout">
+          <div class="checkout-details">
+            <span class="checkout-label">Estimated cost</span>
+            <span id="checkout-value" class="checkout-value">USD 400.00</span>
+          </div>
+          <button class="btn btn-primary trade-btn">Buy</button>
+        </div>
+      </div>
+        </form>
+
+    </section>
+
+    <!-- Bottom Widgets Grid -->
+    <section class="widgets-grid">
+      <div class="widget-card">
+        <h3>Spot Snapshot</h3>
+        <div class="widget-content">
+          <div class="widget-placeholder-graphic"></div>
+        </div>
+      </div>
+      <div class="widget-card">
+        <h3>Vault Image</h3>
+        <div class="widget-content">
+          <div class="widget-placeholder-graphic"></div>
+        </div>
+      </div>
+      <div class="widget-card">
+        <h3>Market Heat</h3>
+        <div class="widget-content">
+          <div class="widget-placeholder-graphic"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+ <script type="module" src="buy.js" ></script>
+ <script type="module" src="nav.js" ></script>
+</body>
+</html>

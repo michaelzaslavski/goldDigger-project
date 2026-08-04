@@ -1,0 +1,17 @@
+{
+  "name": "golddigger-project",
+  "version": "1.0.0",
+  "description": "An investment portfolio tracker that allows users to view their current GOLD investments and their performance over time.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --env-file=.env server.js"
+  },
+  "keywords": [],
+  "author": "michael zaslavski",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.112.0"
+  }
+}
