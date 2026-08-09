@@ -1,15 +1,11 @@
+import { getCurrentGoldPrice } from './GoldPrice.js';
+
 async function updateNavTicker() {
     const liveGoldPrice = document.querySelector('.nav-ticker');
 
 
     try {
-        const response = await fetch('/api/gold-price');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        
-        const price = Number(data.price).toFixed(2);
+        const price = await getCurrentGoldPrice();
         
         liveGoldPrice.textContent = `GOLD: USD ${price}/oz`;
     } catch (error) {
@@ -19,6 +15,4 @@ async function updateNavTicker() {
 }
 updateNavTicker()
 
-export function getCurrentGoldPrice() {
-  return { value: price };
-}
+setInterval(updateNavTicker,60000)

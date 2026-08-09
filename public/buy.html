@@ -10,14 +10,14 @@
 
   <!-- Navigation Bar -->
   <header class="navbar">
-    <div class="nav-brand">
-      <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <ellipse cx="12" cy="6" rx="8" ry="3"></ellipse>
-        <path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"></path>
-        <path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"></path>
-      </svg>
-      <span>My Logo</span>
-    </div>
+   <a href="index.html" class="nav-brand-link">
+    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <ellipse cx="12" cy="6" rx="8" ry="3"></ellipse>
+      <path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"></path>
+      <path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"></path>
+    </svg>
+    <span>MIZZAS</span>
+  </a>
      <div class="nav-ticker">
     </div>
     <button class="nav-menu-btn">
@@ -42,7 +42,11 @@
           <p class="trade-desc">Track the live gold price and buy instantly. Select the amount you want and complete your purchase in seconds.</p>
         </div>
         <div class="trade-header-right">
-          
+          <div class="portfolio-balance-box">
+            <div class="pb-title">Portfolio balance</div>
+            <div class="pb-balance"></div>
+            <div class="pb-sub"><strong></strong></div>
+          </div>
         </div>
       </div>
 
@@ -69,7 +73,7 @@
       </div>
 
       <!-- Action Row -->
-       <form id="buy-form">
+       <form id="trade-form" data-type="buy">
       <div class="trade-action-row">
         <div class="trade-selectors">
           <button  class="qty-pill" data-oz="0.1">0.1 oz</button>
@@ -84,7 +88,9 @@
         <div class="trade-checkout">
           <div class="checkout-details">
             <span class="checkout-label">Estimated cost</span>
-            <span id="checkout-value" class="checkout-value">USD 400.00</span>
+            <span id="checkout-value" class="checkout-value">USD 0.00</span>
+            <span class="checkout-fee">Fee: USD 10.00</span>
+            <span id="rate-price" class="checkout-fee"></span>
           </div>
           <button class="btn btn-primary trade-btn">Buy</button>
         </div>
@@ -116,7 +122,11 @@
     </section>
 
   </main>
- <script type="module" src="buy.js" ></script>
+ <script type="module" src="trade.js" ></script>
  <script type="module" src="nav.js" ></script>
+ <script type="module" src="data.js" ></script>
+ <script type="module" src="htmlFiles.js" ></script>
+ <script type="module" src="valueCalculation.js" ></script>
+ 
 </body>
 </html>

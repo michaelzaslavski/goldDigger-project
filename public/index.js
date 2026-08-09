@@ -1,62 +1,67 @@
 // Target the main container from index.html
-const pageContainer = document.getElementById('page-container');
+import {data} from './data.js';
 
-async function initDashboard() {
-  if (!pageContainer) return;
 
+ async function initDashboard() { 
   try {
-    
-    const response = await fetch('/api/customer-summary');
+    const pageContainer = document.getElementById('page-container');
+    const {summary, transactions} = await data();
 
-    if(!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-     const data = await response.json();
+     if (!transactions || transactions.length === 0) {
+      renderEmptyState(pageContainer);
+      
+    }else {
     
-     getHoldingsTableHTML(data) , renderInvestmentSummary(pageContainer, data);
+      renderInvestmentSummary(pageContainer, summary);
+      
+      getHoldingsTableHTML(transactions); ;
+    }
   } catch (error) {
     console.error('Error fetching customer summary:', error);
-    return null;
-}
     renderEmptyState(pageContainer);
-  }
+}
+}
+
+
+
+
+  
+
+
+    
+  
 
 
 
 
 
 // Helper: Generates HTML table string from data
-function getHoldingsTableHTML(data) {
-    const container = document.querySelector('.table-container');
+ function getHoldingsTableHTML(transactions) {
+    const tableBody = document.querySelector('#holdings-table-body');
     let tableHTML = '';
-    data.forEach((item, index) => {
+    transactions.forEach((item, index) => {
 
       tableHTML += `
-    <table class="holdings-table">
-      <thead>
-        <tr>
-          <th class="text-left">Date Purchased</th>
-          <th class="text-right">Amount (USD)</th>
-          <th class="text-right">Gold (oz)</th>
-          <th class="text-right">Gold (kg)</th>
-          <th class="text-right">Gold rate<br><span class="sub-header">(USD)</span></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td id="date-purchased" class="text-left">${data.date}</td>
-          <td id="amount-purchased" class="text-right">${data.total_invested_usd.toFixed(2)}</td>
-          <td class="text-right">${data.total_gold_oz.toFixed(4)}</td>
-          <td class="text-right">${data.total_gold_kg.toFixed(4)}</td>
-          <td class="text-right">USD ${data.current_spot_price.toFixed(2)}</td>
-        </tr>
-      </tbody>
-    </table>
-  `;
+       <tr data-id="${item.id}">
+        <td class="text-muted">#${index + 1}</td>
+        <td class="text-left">${item.date}</td>
+        <td class="text-left">${item.type}</td>
+        <td class="text-right">$${Number(item.amount_usd).toFixed(2)}</td>
+        <td class="text-right">${Number(item.gold_oz).toFixed(4)} oz</td>
+        <td class="text-right">${Number(item.gold_kg).toFixed(4)} kg</td>
+        <td class="text-right">USD $${Number(item.current_value || item.amount_usd).toFixed(2)}</td>
+        <td class="text-center">
+          <!-- 💡 Store database ID on the button for easy Supabase deletion -->
+          
+        </td>
+      </tr>
+    `;
+    tableBody.innerHTML = tableHTML;
 })
+}
 
-function renderEmptyState(container) {
-  container.innerHTML = `
+ function renderEmptyState(pageContainer) {
+  pageContainer.innerHTML = `
     <section class="main-card empty-state-welcome-card">
       <div class="empty-state-content">
         <h1 class="welcome-title">Welcome to My App</h1>
@@ -76,9 +81,8 @@ function renderEmptyState(container) {
   `;
 }
 
-function renderInvestmentSummary(container, data) {
-  // Fixed: Target container.innerHTML directly
-  container.innerHTML = `
+ function renderInvestmentSummary(pageContainer, summary) {
+  pageContainer.innerHTML = `
     <section class="main-card">
       
       <!-- Left Portfolio Data Area -->
@@ -87,23 +91,39 @@ function renderInvestmentSummary(container, data) {
 
         <!-- Dynamic Holdings Table -->
         <div class="table-container">
-          ${getHoldingsTableHTML(data)}
+          <table class="holdings-table">
+            <thead>
+              <tr>
+                <th class="text-left">#</th>
+                <th class="text-left">Date Purchased</th>
+                <th class="text-left"> Transaction Type</th>
+                <th class="text-right">Amount (USD)</th>
+                <th class="text-right">Gold (oz)</th>
+                <th class="text-right">Gold (kg)</th>
+                <th class="text-right">Current Value</th>
+                <th class="text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody id="holdings-table-body">
+              <!-- Populated by renderHoldingsTable() -->
+            </tbody>
+          </table>
         </div>
 
         <!-- Portfolio Total Banner -->
         <div class="summary-banner">
           <div class="summary-item">
             <span class="summary-label">Total Gold Held</span>
-            <div class="summary-value">${data.total_gold_kg.toFixed(4)} kg • ${data.total_gold_oz.toFixed(4)} oz</div>
+            <div class="summary-value">${Number(summary.total_gold_kg).toFixed(4)} kg • ${Number(summary.total_gold_oz).toFixed(4)} oz</div>
           </div>
           <div class="summary-item text-right">
             <span class="summary-label">Portfolio Market Value</span>
-            <div class="summary-value">USD 40,000</div>
+            <div class="summary-value">USD $${Number(summary.current_market_value).toFixed(2)}</div>
           </div>
         </div>
 
-        <!-- Notes Footer -->
         <p class="notes-text">
+          Values reflect live spot prices and net transaction history.
         </p>
       </div>
 
@@ -113,8 +133,8 @@ function renderInvestmentSummary(container, data) {
         <!-- Account Summary Card -->
         <div class="info-box">
           <span class="info-label">Account Summary</span>
-          <div class="info-main-value">USD ${data.current_market_value.toFixed(2)}</div>
-          <span class="info-subtext">Total profit/loss: USD ${data.profit_loss.toFixed(2)}</span>
+          <div class="info-main-value">USD $${Number(summary.current_market_value).toFixed(2)}</div>
+          <span class="info-subtext">Invested: $${Number(summary.total_invested_usd).toFixed(2)} • P/L: $${Number(summary.profit_loss).toFixed(2)}</span>
         </div>
 
         <!-- Holdings Breakdown Card -->
@@ -122,11 +142,11 @@ function renderInvestmentSummary(container, data) {
           <span class="info-label">Holdings Breakdown</span>
           <div class="info-row">
             <span>Total gold</span>
-            <strong>0.3119 kg</strong>
+            <strong>${Number(summary.total_gold_kg).toFixed(4)} kg</strong>
           </div>
           <div class="info-row">
             <span>Average purchase price</span>
-            <strong>USD ${data.avg_price_per_oz.toFixed(2)}/oz</strong>
+            <strong>USD $${Number(summary.avg_price_per_oz).toFixed(2)}/oz</strong>
           </div>
         </div>
 
@@ -182,6 +202,8 @@ function renderInvestmentSummary(container, data) {
     </section>
   `;
 }
-}
+
+
 // Run execution immediately
 initDashboard();
+setInterval(initDashboard,60000)
